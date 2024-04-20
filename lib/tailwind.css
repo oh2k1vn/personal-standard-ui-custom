@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 0, 122, 204;
+    --color-background: 242, 242, 242;
+    --color-surface: 255, 255, 255;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background: 30, 30, 30;
+      --color-surface: 48, 48, 48;
+    }
+  }
+}
