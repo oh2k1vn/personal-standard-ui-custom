@@ -9,7 +9,6 @@ interface SliderProp {
     url: string;
     alt?: string;
   }[];
-  primary?: string;
   autoPlay?: boolean;
   delay?: number;
   isArrow?: boolean;
@@ -17,7 +16,6 @@ interface SliderProp {
 
 export const Slider: React.FC<SliderProp> = ({
   images,
-  primary,
   autoPlay = false,
   delay = 2000,
   isArrow = true,
@@ -174,30 +172,15 @@ export const Slider: React.FC<SliderProp> = ({
         </button>
       )}
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: ".5rem",
-          left: "50%",
-          translate: "-50%",
-          display: "flex",
-          gap: ".25rem",
-        }}
-      >
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
         {images.map((_, index) => (
           <button
             key={index}
-            className="img-slider-dot-btn"
+            className={`size-2 rounded-full transition-colors ${
+              index === imageIndex ? "bg-primary" : "bg-white bg-opacity-50"
+            }`}
             aria-label={`View Image ${index + 1}`}
             onClick={() => setImageIndex(index)}
-            style={{
-              backgroundColor: `${
-                index === imageIndex ? (primary ? primary : "blue") : "#ffffff"
-              }`,
-              borderRadius: "100%",
-              width: ".6rem",
-              height: ".6rem",
-            }}
           ></button>
         ))}
       </div>

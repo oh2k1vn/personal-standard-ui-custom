@@ -5,27 +5,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "rgba(var(--color-primary))",
-        background: "rgba(var(--color-background))",
-        surface: "rgba(var(--color-surface))",
-      },
-      keyframes: {
-        ripple: {
-          "0%": {
-            opacity: 0,
-          },
-          "25%": {
-            opacity: 1,
-          },
-          "100%": {
-            width: "300%",
-            paddingBottom: "300%",
-            opacity: 0,
-          },
-        },
-      },
-      animation: {
-        ripple: "ripple 0.4s ease-in",
+        primary: "var(--color-primary)",
+        background: "var(--color-background)",
+        surface: "var(--color-surface)",
       },
     },
   },

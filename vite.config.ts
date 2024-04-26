@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import dts from "vite-plugin-dts";
 import tailwindcss from "tailwindcss";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, "lib/main.ts"),
       name: "Personal standard ui custom",
       formats: ["es", "umd"],
-      fileName: (format) => `personal-standard-ui-custom.${format}.js`,
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime", "tailwindcss"],
@@ -25,7 +26,11 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), dts({ include: ["lib"], insertTypesEntry: true })],
+  plugins: [
+    react(),
+    dts({ include: ["lib"], insertTypesEntry: true }),
+    tsconfigPaths(),
+  ],
   css: {
     postcss: {
       plugins: [tailwindcss],
