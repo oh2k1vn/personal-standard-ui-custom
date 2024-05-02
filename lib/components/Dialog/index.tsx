@@ -1,30 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createRoot } from "react-dom/client";
 import DialogComp from "./components";
+import { ISheetInfo } from "types/bottomSheet";
+import { ICreate } from "types/Dialog";
+import { ICloseOptions } from "types/common";
 
-interface DialogInfoProps {
-  [key: string]: {
-    close?: () => void;
-    open?: () => void;
-    visibility?: boolean;
-    closeCustom?: (cb: () => void) => void;
-  };
-}
-
-export interface DialogProps {
-  id?: string;
-  content: React.ReactNode;
-  title?: string;
-  onClose?: () => void;
-  onOpen?: () => void;
-}
-
-interface CloseProps {
-  id?: string;
-  callback?: () => void;
-}
-
-const DialogInfo: DialogInfoProps = {
+const DialogInfo: ISheetInfo = {
   default: {
     visibility: undefined,
     open: undefined,
@@ -34,7 +15,7 @@ const DialogInfo: DialogInfoProps = {
 };
 
 export const Dialog = {
-  create: ({ id, ...rest }: DialogProps) => {
+  create: ({ id, ...rest }: ICreate) => {
     const dialogId = id ?? "default";
     const elementId = `dialog-${dialogId}`;
     if (typeof window !== "undefined") {
@@ -69,7 +50,7 @@ export const Dialog = {
       }
     }
   },
-  close: (options?: CloseProps) => {
+  close: (options?: ICloseOptions) => {
     const dialogId = options?.id ?? "default";
     if (!DialogInfo[dialogId]?.visibility) return;
 

@@ -1,27 +1,30 @@
 import React from "react";
+import { Switch } from "react-aria-components";
 
-interface ToggleProp extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface ToggleProp {
+  onChange?: (e: boolean) => void;
+  value?: boolean;
+  disabled?: boolean;
+  label?: string;
+}
 
-export const Toggle = React.forwardRef<HTMLInputElement, ToggleProp>(
-  ({ className, ...props }, ref) => {
-    return (
-      <label className="flex items-center relative w-max cursor-pointer select-none">
-        <input
-          ref={ref}
-          type="checkbox"
-          className={`appearance-none peer transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-primary bg-gray-300 shadow border border-gray-300 checked:bg-primary ${className}`}
-          {...props}
-        />
-        {/* <span className="absolute font-medium text-xs uppercase right-1 text-white">
-          OFF
-        </span>
-        <span className="absolute font-medium text-xs uppercase right-8 text-white">
-          ON
-        </span> */}
-        <span
-          className={`w-7 h-7 right-7 absolute rounded-full transform transition-transform bg-gray-200  peer-checked:translate-x-7 ${className}`}
-        />
-      </label>
-    );
-  }
-);
+export const Toggle: React.FC<ToggleProp> = ({
+  onChange,
+  value,
+  disabled,
+  label,
+}) => {
+  return (
+    <Switch
+      isDisabled={disabled}
+      isSelected={value}
+      onChange={onChange}
+      className="inline-flex group"
+    >
+      <div className="w-9 h-6 bg-zinc-600 rounded-full border-2 border-transparent group-data-[selected]:bg-primary mr-4 transition-all duration-300">
+        <div className="size-5 group-data-[pressed]:w-6 group-data-[selected]:group-data-[pressed]:ml-2 bg-white rounded-full group-data-[selected]:ml-3 transition-all duration-300 shadow"></div>
+      </div>
+      {label}
+    </Switch>
+  );
+};

@@ -1,29 +1,25 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { DialogProps } from ".";
 import React from "react";
+import { Button, cn } from "main";
+import { IDialogProps } from "types/Dialog";
 
-type Props = {
-  getHandleOpen?: (value: () => void) => void;
-  getHandleClose?: (value: () => void) => void;
-  getHandleCloseCustom?: (value: (cb: () => void) => void) => void;
-  getSheetVisibility?: (value: boolean) => void;
-} & DialogProps;
-
-const DialogComp = ({
+const DialogComp: React.FC<IDialogProps> = ({
   id,
   content,
+  buttons,
   title,
+  flex = "row",
   onClose,
   onOpen,
   getHandleClose,
   getHandleCloseCustom,
   getHandleOpen,
   getSheetVisibility,
-}: Props) => {
+}) => {
   const [open, setOpen] = React.useState(true);
 
   const dialogId = id ?? "default";
-  const elementId = `bottom-sheet-${dialogId}`;
+  const elementId = `dialog-${dialogId}`;
 
   const handleClose = () => {
     if (!open) return;
@@ -74,10 +70,38 @@ const DialogComp = ({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="p-4 bg-white rounded-lg flex flex-col min-w-[18rem]"
+              className="p-3 bg-white rounded-lg flex flex-col min-w-[18rem]"
             >
-              <div className="font-semibold mb-3 text-center">{title}</div>
-              <div className="flex-1 no-scrollbar">{content}</div>
+              {title && <div className="font-semibold mb-3 ">{title}</div>}
+              <div className="flex-1 no-scrollbar text-sm">{content}</div>
+              {buttons && (
+                <div
+                  className={cn("flex items-center gap-2 mt-4", {
+                    "flex-col": flex == "col",
+                    "flex-row justify-end": flex == "row",
+                  })}
+                >
+                  {buttons?.map((item, index) => (
+                    <Button
+                      key={index}
+                      onClick={() => {
+                        if (item.close) {
+                          handleClose();
+                        } else {
+                          item.onClick;
+                        }
+                      }}
+                      className={cn("text-sm", {
+                        "bg-transparent text-gray-600": index == 1,
+                        "w-full": flex == "col",
+                      })}
+                      style={item.style}
+                    >
+                      {item.text}
+                    </Button>
+                  ))}
+                </div>
+              )}
             </motion.div>
           </motion.div>
         )}

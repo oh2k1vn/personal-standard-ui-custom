@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
-  motion,
   AnimatePresence,
   animate,
+  motion,
   useDragControls,
   useMotionValue,
 } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 
-import * as T from "./types";
-import { cn } from "utils/cn";
 import styled from "styled-components";
+import { IBottomSheetProps, TArrowBottomSheet } from "types/bottomSheet";
+import { TVoid } from "types/common";
+import { cn } from "utils/cn";
+import { cleanupRootStyles } from "utils/utils";
 
-const BottomSheetComp: FC<T.Props> = ({
+const BottomSheetComp: FC<IBottomSheetProps> = ({
   id,
   content,
   header,
@@ -37,18 +39,19 @@ const BottomSheetComp: FC<T.Props> = ({
   const sheetRef = useRef<HTMLDivElement>(null);
 
   const [sheetHeight, setSheetHeight] = useState(0);
-  const [_, setArrow] = useState<T.Arrow>("straight");
+  const [_, setArrow] = useState<TArrowBottomSheet>("straight");
 
   const sheetId = id ?? "default";
   const elementId = `bottom-sheet-${sheetId}`;
 
   const handleClose = () => {
+    cleanupRootStyles();
     if (!open) return;
     setOpen(false);
     onClose?.();
   };
 
-  const handleCloseCustom = (cb: T.CallBack) => {
+  const handleCloseCustom = (cb: TVoid) => {
     setOpen(false);
     cb?.();
   };

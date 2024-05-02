@@ -9,6 +9,7 @@ interface ButtonProps {
   disabled?: boolean;
   children: React.ReactNode;
   onClick?: any;
+  style?: React.CSSProperties;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -17,11 +18,13 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   children,
   onClick,
+  style,
 }) => {
   return (
     <Ripple
       onClick={disabled ? () => {} : onClick}
       color={"yellow"}
+      style={style}
       className={cn(
         "relative py-2 px-3 w-fit select-none rounded-md text-center bg-primary border-none text-white cursor-pointer",
         className,

@@ -1,8 +1,10 @@
 import { createRoot } from "react-dom/client";
+import { ICreate, ISheetInfo } from "types/bottomSheet";
+import { ICloseOptions } from "types/common";
+import { applyRootStyles } from "utils/utils";
 import BottomSheetComp from "./component";
-import * as T from "./types";
 
-const sheetInfo: T.SheetInfo = {
+const sheetInfo: ISheetInfo = {
   default: {
     visibility: undefined,
     open: undefined,
@@ -17,7 +19,7 @@ export const BottomSheet = {
     maskClosable = true,
     id,
     ...rest
-  }: T.Create) => {
+  }: ICreate) => {
     const sheetId = id ?? "default";
     const elementId = `bottom-sheet-${sheetId}`;
     if (typeof window !== "undefined") {
@@ -29,8 +31,11 @@ export const BottomSheet = {
       sheetInfo[sheetId] = {};
 
       const container = document.getElementById(elementId);
+
       if (container) {
         const root = createRoot(container);
+        applyRootStyles();
+
         root.render(
           <BottomSheetComp
             id={id}
@@ -54,7 +59,7 @@ export const BottomSheet = {
       }
     }
   },
-  close: (options?: T.CloseOptions) => {
+  close: (options?: ICloseOptions) => {
     const sheetId = options?.id ?? "default";
     if (!sheetInfo[sheetId]?.visibility) return;
 
