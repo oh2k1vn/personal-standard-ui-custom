@@ -21,6 +21,7 @@ const BottomSheetComp: FC<IBottomSheetProps> = ({
   header,
   footer,
   dragHandle,
+  iconClose = false,
   getHandleClose,
   getHandleCloseCustom,
   getHandleOpen,
@@ -148,6 +149,7 @@ const BottomSheetComp: FC<IBottomSheetProps> = ({
                 className={cn("overflow-hidden w-full rounded-t-[10px]", {
                   "bg-[#282828] text-white": darkMode,
                   "bg-white": !darkMode,
+                  "rounded-none": height === 100,
                 })}
                 style={{ height: height ? height + "vh" : "auto" }}
                 ref={sheetRef}
@@ -160,15 +162,34 @@ const BottomSheetComp: FC<IBottomSheetProps> = ({
                 }}
               >
                 <div className="max-h-[90vh] relative flex flex-col h-full">
-                  <div className="relative pt-4 bg-white z-10">
+                  <div className="relative bg-white z-10">
+                    {header && (
+                      <div className="py-3 text-center font-semibold text-lg">
+                        {header}
+                      </div>
+                    )}
                     <div className="w-16 h-1.5 rounded-full bg-black bg-opacity-20 mx-auto" />
-                    {header && <div className="pt-[10px]">{header}</div>}
                     {dragHandle?.includes("header") && (
                       <DragHandle debug={debug} />
                     )}
+
+                    {/* icon close */}
+                    {iconClose || height === 100 ? (
+                      <svg
+                        onClick={handleClose}
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="size-8 absolute left-2 top-1/2 -translate-y-1/2 text-gray-500"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="m12 12.727l-3.592 3.592q-.16.16-.354.15T7.7 16.3t-.16-.363t.16-.364L11.273 12L7.681 8.433q-.16-.16-.15-.364t.169-.363t.363-.16t.364.16L12 11.298l3.567-3.592q.16-.16.354-.16t.354.16q.165.165.165.366t-.165.36L12.702 12l3.592 3.592q.16.16.16.354t-.16.354q-.165.165-.366.165t-.36-.165z"
+                        />
+                      </svg>
+                    ) : null}
                   </div>
 
-                  <div className="size-full relative overflow-hidden flex-1">
+                  <div className="size-full relative overflow-hidden flex-1 mt-4">
                     <div
                       className={cn(
                         "size-full overflow-auto relative no-scrollbar",

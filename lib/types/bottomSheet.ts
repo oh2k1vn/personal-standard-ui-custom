@@ -8,6 +8,7 @@ export interface IBottomSheet {
   content: React.ReactNode;
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  iconClose?: boolean;
   dragHandle?: TDragHandle[];
   onClose?: TVoid;
   onOpen?: TVoid;
@@ -34,4 +35,3 @@ export interface ISheetInfo {
     closeCustom?: TCustomVoid;
   };
 }
-

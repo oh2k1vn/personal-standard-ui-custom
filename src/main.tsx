@@ -4,10 +4,16 @@ import ReactDOM from "react-dom/client";
 
 import "../lib/tailwind.css";
 
+import { BottomSheet, IBottomSheet } from "../lib/components/BottomSheet";
 import { Button } from "../lib/components/Button";
-import { BottomSheet } from "../lib/components/BottomSheet";
+import { Dialog, IDialog } from "../lib/components/Dialog";
 
 const ComponentApp = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const ref = React.useRef<IBottomSheet>(null);
+  const ref1 = React.useRef<IBottomSheet>(null);
+  const dialog = React.useRef<IDialog>(null);
   return (
     <>
       <div
@@ -18,16 +24,100 @@ const ComponentApp = () => {
         }}
       >
         <div className="bg-surface max-w-80 w-full rounded shadow dark:text-white text-black flex flex-col gap-4 p-4 h-full overflow-y-auto">
-          <div className="">
+          <div className="flex flex-col gap-6 items-center">
             <Button
               onClick={() => {
-                BottomSheet.create({
-                  content: <>hieu</>,
-                });
+                ref.current?.open();
               }}
             >
-              OPEN
+              Bottom Sheet
             </Button>
+            <Button
+              onClick={() => {
+                dialog.current?.open();
+              }}
+            >
+              Dialog
+            </Button>
+
+            <BottomSheet ref={ref} title="hiêu">
+              <div className="mx-auto max-w-2xl space-y-4 ">
+                <h2 className="text-4xl font-bold ">
+                  Drag the handle at the top of this modal downwards 100px to
+                  close it
+                </h2>
+                <Button
+                  onClick={() => {
+                    setOpen(!open);
+                  }}
+                >
+                  Bottom Sheet
+                </Button>
+
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Minima laboriosam quos deleniti veniam est culpa quis nihil
+                  enim suscipit nulla aliquid iure optio quaerat deserunt,
+                  molestias quasi facere aut quidem reprehenderit maiores.
+                </p>
+                {open && (
+                  <>
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Minima laboriosam quos deleniti veniam est culpa quis
+                      nihil enim suscipit nulla aliquid iure optio quaerat
+                      deserunt, molestias quasi facere aut quidem reprehenderit
+                      maiores.
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Minima laboriosam quos deleniti veniam est culpa quis
+                      nihil enim suscipit nulla aliquid iure optio quaerat
+                      deserunt, molestias quasi facere aut quidem reprehenderit
+                      maiores.
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Minima laboriosam quos deleniti veniam est culpa quis
+                      nihil enim suscipit nulla aliquid iure optio quaerat
+                      deserunt, molestias quasi facere aut quidem reprehenderit
+                      maiores.
+                    </p>
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Minima laboriosam quos deleniti veniam est culpa quis
+                      nihil enim suscipit nulla aliquid iure optio quaerat
+                      deserunt, molestias quasi facere aut quidem reprehenderit
+                      maiores.
+                    </p>
+                  </>
+                )}
+              </div>
+            </BottomSheet>
+
+            <BottomSheet ref={ref1} title="hiêu">
+              <div className="mx-auto max-w-2xl space-y-4 ">
+                <h2 className="text-4xl font-bold ">
+                  Drag the handle at the top of this modal downwards 100px to
+                  close it
+                </h2>
+                <Button
+                  onClick={() => {
+                    if (ref.current) {
+                      ref.current.close();
+                    }
+                  }}
+                >
+                  Bottom Sheet
+                </Button>
+              </div>
+            </BottomSheet>
+
+            <Dialog
+              ref={dialog}
+              content="Drag the handle at the top of this modal downwards 100px to close it"
+              buttons={[{ text: "hieu", close: true }, { text: "hieu" }]}
+            ></Dialog>
           </div>
         </div>
       </div>

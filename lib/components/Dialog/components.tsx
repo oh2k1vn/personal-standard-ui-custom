@@ -63,22 +63,23 @@ const DialogComp: React.FC<IDialogProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute -z-[1] inset-0 backdrop-blur-sm bg-black/30"
+              className="absolute -z-[1] inset-0 bg-black/30"
               onClick={() => handleClose()}
             ></motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="p-3 bg-white rounded-lg flex flex-col min-w-[18rem]"
+              className="p-4 bg-white rounded-lg flex flex-col min-w-[18rem] max-w-[90%]"
             >
               {title && <div className="font-semibold mb-3 ">{title}</div>}
               <div className="flex-1 no-scrollbar text-sm">{content}</div>
-              {buttons && (
+              {buttons?.length ? (
                 <div
                   className={cn("flex items-center gap-2 mt-4", {
                     "flex-col": flex == "col",
                     "flex-row justify-end": flex == "row",
+                    "justify-center items-center": buttons.length == 1,
                   })}
                 >
                   {buttons?.map((item, index) => (
@@ -94,6 +95,7 @@ const DialogComp: React.FC<IDialogProps> = ({
                       className={cn("text-sm", {
                         "bg-transparent text-gray-600": index == 1,
                         "w-full": flex == "col",
+                        "text-primary bg-transparent": buttons.length == 1,
                       })}
                       style={item.style}
                     >
@@ -101,7 +103,7 @@ const DialogComp: React.FC<IDialogProps> = ({
                     </Button>
                   ))}
                 </div>
-              )}
+              ) : null}
             </motion.div>
           </motion.div>
         )}
