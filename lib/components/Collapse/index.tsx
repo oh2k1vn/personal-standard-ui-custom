@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "main";
+import { cn } from "utils/cn";
 
 interface ICollapse {
   isOpen: boolean;

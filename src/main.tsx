@@ -27,7 +27,7 @@ const ComponentApp = () => {
           <div className="flex flex-col gap-6 items-center">
             <Button
               onClick={() => {
-                ref.current?.open();
+                Promise.all([ref.current?.open(), ref1.current?.open()]);
               }}
             >
               Bottom Sheet
@@ -53,7 +53,6 @@ const ComponentApp = () => {
                 >
                   Bottom Sheet
                 </Button>
-
                 <p>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                   Minima laboriosam quos deleniti veniam est culpa quis nihil
@@ -103,9 +102,7 @@ const ComponentApp = () => {
                 </h2>
                 <Button
                   onClick={() => {
-                    if (ref.current) {
-                      ref.current.close();
-                    }
+                    ref1.current?.close();
                   }}
                 >
                   Bottom Sheet
