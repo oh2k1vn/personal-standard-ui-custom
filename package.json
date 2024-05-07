@@ -1,7 +1,7 @@
 {
   "name": "personal-standard-ui-custom",
   "private": false,
-  "version": "0.2.5",
+  "version": "0.2.7",
   "type": "module",
   "license": "MIT",
   "files": [

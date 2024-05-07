@@ -113,7 +113,15 @@ const ComponentApp = () => {
             <Dialog
               ref={dialog}
               content="Drag the handle at the top of this modal downwards 100px to close it"
-              buttons={[{ text: "hieu", close: true }, { text: "hieu" }]}
+              buttons={[
+                { text: "hieu", close: true },
+                {
+                  text: "1",
+                  onClick() {
+                    console.log("123");
+                  },
+                },
+              ]}
             ></Dialog>
           </div>
         </div>

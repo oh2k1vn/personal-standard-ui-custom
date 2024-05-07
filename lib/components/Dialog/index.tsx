@@ -166,7 +166,7 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
                         if (item.close) {
                           handleClose();
                         } else {
-                          item.onClick;
+                          item.onClick && item.onClick();
                         }
                       }}
                       className={cn("text-sm ", {
