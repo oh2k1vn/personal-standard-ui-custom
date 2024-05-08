@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from "react";
@@ -25,7 +26,7 @@ export const Slider: React.FC<SliderProp> = ({
   const [dragging, setDragging] = useState(false);
   const [autoplayActive] = useState(autoPlay);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [intervalId, setIntervalId] = useState<any>(null);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchMoveX, setTouchMoveX] = useState(0);
 

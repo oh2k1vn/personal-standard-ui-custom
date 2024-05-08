@@ -6,6 +6,7 @@ import "../lib/tailwind.css";
 
 import { BottomSheet, IBottomSheet } from "../lib/components/BottomSheet";
 import { Button } from "../lib/components/Button";
+import { Checkbox } from "../lib/components/Checkbox";
 import { Dialog, IDialog } from "../lib/components/Dialog";
 
 const ComponentApp = () => {
@@ -14,6 +15,7 @@ const ComponentApp = () => {
   const ref = React.useRef<IBottomSheet>(null);
   const ref1 = React.useRef<IBottomSheet>(null);
   const dialog = React.useRef<IDialog>(null);
+
   return (
     <>
       <div
@@ -113,9 +115,11 @@ const ComponentApp = () => {
             <Dialog
               ref={dialog}
               content="Drag the handle at the top of this modal downwards 100px to close it"
+              flex="col"
               buttons={[
                 { text: "hieu", close: true },
                 {
+                  isBorder: true,
                   text: "1",
                   onClick() {
                     console.log("123");
@@ -123,6 +127,10 @@ const ComponentApp = () => {
                 },
               ]}
             ></Dialog>
+
+            <div className="flex justify-center items-center size-20 bg-white">
+              <Checkbox />
+            </div>
           </div>
         </div>
       </div>

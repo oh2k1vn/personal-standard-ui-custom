@@ -1,76 +1,3 @@
-// /* eslint-disable react-refresh/only-export-components */
-// import { createRoot } from "react-dom/client";
-// import DialogComp from "./components";
-// import { ISheetInfo } from "types/bottomSheet";
-// import { ICreate } from "types/Dialog";
-// import { ICloseOptions } from "types/common";
-
-// const DialogInfo: ISheetInfo = {
-//   default: {
-//     visibility: undefined,
-//     open: undefined,
-//     close: undefined,
-//     closeCustom: undefined,
-//   },
-// };
-
-// export const Dialog = {
-//   create: ({ id, ...rest }: ICreate) => {
-//     const dialogId = id ?? "default";
-//     const elementId = `dialog-${dialogId}`;
-//     if (typeof window !== "undefined") {
-//       document?.getElementById?.(elementId)?.remove();
-//       const containerDomNode = document.createElement("div");
-//       containerDomNode.setAttribute("id", elementId);
-//       const app = document.getElementById("mini-app");
-
-//       // document?.body.appendChild(containerDomNode);
-//       if (app) {
-//         app.appendChild(containerDomNode);
-//       }
-
-//       DialogInfo[dialogId] = {};
-
-//       const container = document.getElementById(elementId);
-//       if (container) {
-//         const root = createRoot(container);
-//         root.render(
-//           <DialogComp
-//             id={id}
-//             getHandleCloseCustom={(value) => {
-//               DialogInfo[dialogId].closeCustom = value;
-//             }}
-//             getSheetVisibility={(value) => {
-//               DialogInfo[dialogId].visibility = value;
-//             }}
-//             getHandleClose={(value) => {
-//               DialogInfo[dialogId].close = value;
-//             }}
-//             getHandleOpen={(value) => {
-//               DialogInfo[dialogId].open = value;
-//             }}
-//             {...rest}
-//           />
-//         );
-//       }
-//     }
-//   },
-//   close: (options?: ICloseOptions) => {
-//     const dialogId = options?.id ?? "default";
-//     if (!DialogInfo[dialogId]?.visibility) return;
-
-//     if (options?.callback) {
-//       DialogInfo[dialogId]?.closeCustom?.(options.callback);
-//     } else {
-//       DialogInfo[dialogId]?.close?.();
-//     }
-//   },
-//   isOpen: (id?: string) => {
-//     const dialogId = id ?? "default";
-//     return DialogInfo[dialogId].visibility;
-//   },
-// };
-
 import { AnimatePresence, motion } from "framer-motion";
 import { Button, cn } from "main";
 import React from "react";
@@ -82,7 +9,9 @@ interface IDialogProps {
     text: string;
     close?: boolean;
     style?: React.CSSProperties;
+    isBorder?: boolean;
     onClick?: () => void;
+    className?: string;
   }[];
   flex?: "row" | "col";
 }
@@ -101,11 +30,9 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
       () => {
         return {
           open() {
-            console.log("open");
             setOpen(true);
           },
           close() {
-            console.log("close");
             setOpen(false);
           },
         };
@@ -142,18 +69,18 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
               className="absolute inset-0 -z-[1] bg-neutral-950/70 "
             ></motion.div>
             <motion.div
-              className="relative bg-white z-50 rounded-lg px-4 py-2 max-w-[85vw] w-full"
+              className="relative bg-white z-50 rounded-lg px-4 py-4 max-w-[85vw] w-full"
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85 }}
             >
-              <div className="font-medium text-black">
+              <div className="font-bold text-base text-black">
                 {title ? title : "Thông báo"}
               </div>
-              <div className="text-sm mt-2 mb-4 text-black">{content}</div>
+              <div className="text-sm mt-3 mb-4 text-black">{content}</div>
               {buttons?.length ? (
                 <div
-                  className={cn("flex items-center gap-2 mt-4 ", {
+                  className={cn("flex items-center gap-3 mt-4 ", {
                     "flex-col": flex == "col",
                     "flex-row justify-end": flex == "row",
                     "justify-center items-center": buttons.length == 1,
@@ -169,10 +96,11 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
                           item.onClick && item.onClick();
                         }
                       }}
-                      className={cn("text-sm ", {
+                      className={cn("text-sm", {
                         "bg-transparent text-gray-600": index == 1,
                         "w-full": flex == "col",
                         "text-primary bg-transparent": buttons.length == 1,
+                        "border border-primary": item.isBorder,
                       })}
                       style={item.style}
                     >
