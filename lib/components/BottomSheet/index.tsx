@@ -118,17 +118,22 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
                     controls.start(e);
                   }}
                   className={cn(
-                    "cursor-grab w-full bg-white touch-none active:cursor-grabbing relative before:h-1.5 before:w-14 before:bg-gray-300 before:absolute before:rounded-full before:left-1/2 before:-translate-x-1/2 before:top-1/2 before:-translate-y-1/2",
+                    "font-bold pb-6 px-12 text-center relative bg-white py-4 touch-none active:cursor-grabbing cursor-grab",
                     {
-                      "before:top-[2.8rem] text-center font-bold pb-6 pt-2":
-                        title,
-                      "p-4": !title,
+                      "before:bottom-3 pt-2": title,
                     }
                   )}
                 >
-                  {title}
+                  <p className="line-clamp-1">{title}</p>
+                  <div
+                    className={cn(
+                      "h-1.5 w-14 bg-gray-300 absolute rounded-full left-1/2 -translate-x-1/2 bottom-3",
+                      {
+                        "bottom-2": title,
+                      }
+                    )}
+                  ></div>
 
-                  {/* Icon close */}
                   {iconClose && (
                     <svg
                       onClick={handleClose}
@@ -152,7 +157,7 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
                   }
                 )}
               >
-                <ResizablePanel duration={0.5}>{children}</ResizablePanel>
+                {children}
               </div>
             </motion.div>
           </motion.div>
@@ -161,49 +166,3 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
     );
   }
 );
-
-function ResizablePanel({ children, duration }: any) {
-  const [ref, { height }] = useMeasure();
-
-  const animations = {
-    fade: {
-      animate: {
-        transition: { duration: duration, delay: duration },
-      },
-      exit: { transition: { duration: duration } },
-    },
-  };
-
-  return (
-    <motion.div
-      className="relative overflow-hidden w-full"
-      animate={{ height: height || "auto" }}
-      transition={{ duration }}
-    >
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={JSON.stringify(children, ignoreCircularReferences())}
-          {...animations.fade}
-          transition={{ duration }}
-          className={`${height ? "absolute" : "relative"} w-full`}
-        >
-          <div ref={ref} className="w-full">
-            {children}
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
-const ignoreCircularReferences = () => {
-  const seen = new WeakSet();
-  return (key: string, value: object | null) => {
-    if (key.startsWith("_")) return;
-    if (typeof value === "object" && value !== null) {
-      if (seen.has(value)) return;
-      seen.add(value);
-    }
-    return value;
-  };
-};

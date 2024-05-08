@@ -69,7 +69,7 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
               className="absolute inset-0 -z-[1] bg-neutral-950/70 "
             ></motion.div>
             <motion.div
-              className="relative bg-white z-50 rounded-lg px-4 py-4 max-w-[85vw] w-full"
+              className="relative bg-white z-50 rounded-lg p-6 max-w-[85vw] w-full"
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85 }}
@@ -77,7 +77,7 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
               <div className="font-bold text-base text-black">
                 {title ? title : "Thông báo"}
               </div>
-              <div className="text-sm mt-3 mb-4 text-black">{content}</div>
+              <div className="text-sm mt-3 mb-4 text-black/80">{content}</div>
               {buttons?.length ? (
                 <div
                   className={cn("flex items-center gap-3 mt-4 ", {

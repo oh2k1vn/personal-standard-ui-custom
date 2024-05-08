@@ -29,7 +29,7 @@ const ComponentApp = () => {
           <div className="flex flex-col gap-6 items-center">
             <Button
               onClick={() => {
-                Promise.all([ref.current?.open(), ref1.current?.open()]);
+                Promise.all([ref.current?.open()]);
               }}
             >
               Bottom Sheet
@@ -42,7 +42,7 @@ const ComponentApp = () => {
               Dialog
             </Button>
 
-            <BottomSheet ref={ref} title="hiêu">
+            <BottomSheet ref={ref} title="hieu">
               <div className="mx-auto max-w-2xl space-y-4 ">
                 <h2 className="text-4xl font-bold ">
                   Drag the handle at the top of this modal downwards 100px to
@@ -132,6 +132,7 @@ const ComponentApp = () => {
               <Checkbox />
             </div>
           </div>
+          <div className="line-clamp-2 px-8">hieu nguye</div>
         </div>
       </div>
     </>
