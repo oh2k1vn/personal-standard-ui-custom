@@ -4,15 +4,25 @@
 
 @layer base {
   :root {
-    --color-primary: #007acc;
+    --color-primary: #8739f9;
     --color-background: #f2f2f2;
     --color-surface: #ffffff;
+    --color-accent: #37b9f1;
+    --color-grey: #f2f5f5;
+    --color-text: #121212;
+    --color-label: #908e9b;
+    --color-disabled: #e1dfe9;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
       --color-background: #1e1e1e;
       --color-surface: #303030;
+      --color-accent: #37b9f1;
+      --color-grey: #f2f5f5;
+      --color-text: #f1f1f1;
+      --color-label: #908e9b;
+      --color-disabled: #e1dfe9;
     }
   }
 
@@ -30,6 +40,15 @@
 
   div {
     @apply select-none;
+  }
+}
+
+@layer components {
+  .text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
   }
 }
 

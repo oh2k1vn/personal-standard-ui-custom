@@ -1,141 +1,72 @@
-/* eslint-disable react-refresh/only-export-components */
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import "../lib/tailwind.css";
 
-import { BottomSheet, IBottomSheet } from "../lib/components/BottomSheet";
-import { Button } from "../lib/components/Button";
-import { Checkbox } from "../lib/components/Checkbox";
-import { Dialog, IDialog } from "../lib/components/Dialog";
-
 const ComponentApp = () => {
-  const [open, setOpen] = React.useState(false);
-
-  const ref = React.useRef<IBottomSheet>(null);
-  const ref1 = React.useRef<IBottomSheet>(null);
-  const dialog = React.useRef<IDialog>(null);
+  const scrollY = useMotionValue(0);
+  const scale = useTransform(scrollY, [0, 100], [0, 1]);
+  const opacity = useTransform(scrollY, [0, 100], [0, 1]);
 
   return (
-    <>
-      <div
-        id="container"
-        className="transition-all duration-500 bg-background flex items-center justify-center h-screen"
+    <motion.div className="relative">
+      <motion.div
         style={{
-          padding: "1rem",
+          width: 40,
+          height: 40,
+          borderRadius: 20,
+          position: "absolute",
+          top: "13%",
+          marginTop: -85,
+          left: "50%",
+          marginLeft: -20,
+          scale: scale,
+          opacity: opacity,
         }}
+        className="flex flex-col justify-center items-center"
       >
-        <div className="bg-surface max-w-80 w-full rounded shadow dark:text-white text-black flex flex-col gap-4 p-4 h-full overflow-y-auto">
-          <div className="flex flex-col gap-6 items-center">
-            <Button
-              onClick={() => {
-                Promise.all([ref.current?.open()]);
-              }}
-            >
-              Bottom Sheet
-            </Button>
-            <Button
-              onClick={() => {
-                dialog.current?.open();
-              }}
-            >
-              Dialog
-            </Button>
-
-            <BottomSheet ref={ref} title="hieu">
-              <div className="mx-auto max-w-2xl space-y-4 ">
-                <h2 className="text-4xl font-bold ">
-                  Drag the handle at the top of this modal downwards 100px to
-                  close it
-                </h2>
-                <Button
-                  onClick={() => {
-                    setOpen(!open);
-                  }}
-                >
-                  Bottom Sheet
-                </Button>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Minima laboriosam quos deleniti veniam est culpa quis nihil
-                  enim suscipit nulla aliquid iure optio quaerat deserunt,
-                  molestias quasi facere aut quidem reprehenderit maiores.
-                </p>
-                {open && (
-                  <>
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Minima laboriosam quos deleniti veniam est culpa quis
-                      nihil enim suscipit nulla aliquid iure optio quaerat
-                      deserunt, molestias quasi facere aut quidem reprehenderit
-                      maiores.
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Minima laboriosam quos deleniti veniam est culpa quis
-                      nihil enim suscipit nulla aliquid iure optio quaerat
-                      deserunt, molestias quasi facere aut quidem reprehenderit
-                      maiores.
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Minima laboriosam quos deleniti veniam est culpa quis
-                      nihil enim suscipit nulla aliquid iure optio quaerat
-                      deserunt, molestias quasi facere aut quidem reprehenderit
-                      maiores.
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Minima laboriosam quos deleniti veniam est culpa quis
-                      nihil enim suscipit nulla aliquid iure optio quaerat
-                      deserunt, molestias quasi facere aut quidem reprehenderit
-                      maiores.
-                    </p>
-                  </>
-                )}
-              </div>
-            </BottomSheet>
-
-            <BottomSheet ref={ref1} title="hiêu">
-              <div className="mx-auto max-w-2xl space-y-4 ">
-                <h2 className="text-4xl font-bold ">
-                  Drag the handle at the top of this modal downwards 100px to
-                  close it
-                </h2>
-                <Button
-                  onClick={() => {
-                    ref1.current?.close();
-                  }}
-                >
-                  Bottom Sheet
-                </Button>
-              </div>
-            </BottomSheet>
-
-            <Dialog
-              ref={dialog}
-              content="Drag the handle at the top of this modal downwards 100px to close it"
-              flex="col"
-              buttons={[
-                { text: "hieu", close: true },
-                {
-                  isBorder: true,
-                  text: "1",
-                  onClick() {
-                    console.log("123");
-                  },
-                },
-              ]}
-            ></Dialog>
-
-            <div className="flex justify-center items-center size-20 bg-white">
-              <Checkbox />
-            </div>
-          </div>
-          <div className="line-clamp-2 px-8">hieu nguye</div>
-        </div>
-      </div>
-    </>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          className="animate-spin"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill="currentColor"
+            fillRule="evenodd"
+            d="M11 16a2 2 0 1 1 0 4a2 2 0 0 1 0-4m-6.259-3a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5m11.578.5a2 2 0 1 1 0 4a2 2 0 0 1 0-4M18.5 9.319a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3M2.5 6a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5m15.286-.793a1 1 0 1 1 0 2a1 1 0 0 1 0-2M8 0a3 3 0 1 1 0 6a3 3 0 0 1 0-6m7.5 3a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1"
+          />
+        </svg>
+      </motion.div>
+      <motion.div
+        style={{
+          overflow: "hidden",
+          position: "relative",
+          transform: "translateZ(0)",
+        }}
+        className="h-screen w-full"
+      >
+        <motion.div
+          style={{ y: scrollY }}
+          drag="y"
+          dragConstraints={{
+            top: 0,
+            bottom: 0,
+          }}
+          transition={{
+            ease: [0.32, 0.72, 0, 1],
+            duration: 0.5,
+          }}
+          className="bg-slate-800/10 h-full "
+          onDragEnd={(event, info) => {
+            console.log(info.offset.y);
+          }}
+        >
+          123
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

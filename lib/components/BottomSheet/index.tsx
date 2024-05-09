@@ -66,7 +66,6 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
         document.body.style.overflow = "";
       }
     }, [open]);
-
     return (
       <AnimatePresence mode="wait">
         {open && (
@@ -93,7 +92,10 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
               )}
               style={{
                 y,
-                height: setHeight ? setHeight + "vh" : "fit-content",
+                height: setHeight
+                  ? setHeight + "vh"
+                  : "fit-content -webkit-fill-available",
+                maxHeight: window.innerHeight + "px",
               }}
               drag="y"
               dragControls={controls}
