@@ -1,15 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from "react";
-import ReactDOM from "react-dom/client";
 import "../lib/tailwind.css";
 
 import { BottomSheet, IBottomSheet } from "../lib/components/BottomSheet";
 import { Button } from "../lib/components/Button";
+import { Input } from "../lib/components/Input";
 import { Checkbox } from "../lib/components/Checkbox";
 import { Dialog, IDialog } from "../lib/components/Dialog";
 import { Demo } from "./demo";
 
-const ComponentApp = () => {
+export const ComponentA = () => {
   const [open, setOpen] = React.useState(false);
 
   const ref = React.useRef<IBottomSheet>(null);
@@ -26,7 +26,8 @@ const ComponentApp = () => {
         }}
       >
         <div className="bg-surface max-w-80 w-full rounded shadow dark:text-white text-black flex flex-col gap-4 p-4 h-full overflow-y-auto">
-          <div className="flex flex-col gap-6 items-center">
+          <div className="flex flex-col gap-6 items-center bg-white">
+            <Input className=" bg-white" type="text" />
             <Button
               onClick={() => {
                 Promise.all([ref.current?.open()]);
@@ -138,5 +139,3 @@ const ComponentApp = () => {
     </>
   );
 };
-
-ReactDOM.createRoot(document.getElementById("root")!).render(<ComponentApp />);

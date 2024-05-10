@@ -75,7 +75,7 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="fixed inset-0 z-50 bg-neutral-950/70 select-none"
+            className="fixed inset-0 z-50 bg-neutral-950/30 select-none"
           >
             <motion.div
               id="drawer"
@@ -153,7 +153,7 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
               </div>
               <div
                 className={cn(
-                  "relative z-0 h-full overflow-y-scroll p-4 mt-5 no-scrollbar w-full",
+                  "relative z-0 h-full overflow-y-scroll qmt-5 no-scrollbar w-full",
                   {
                     "mt-12": title,
                   }
