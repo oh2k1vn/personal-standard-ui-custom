@@ -43,12 +43,14 @@ export const ComponentA = () => {
               Dialog
             </Button>
 
-            <BottomSheet ref={ref} title="hieu">
+            <BottomSheet ref={ref}>
               <div className="mx-auto max-w-2xl space-y-4 ">
-                <h2 className="text-4xl font-bold ">
-                  Drag the handle at the top of this modal downwards 100px to
-                  close it
-                </h2>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Minima laboriosam quos deleniti veniam est culpa quis nihil
+                  enim suscipit nulla aliquid iure optio quaerat deserunt,
+                  molestias quasi facere aut quidem reprehenderit maiores.
+                </p>
                 <Button
                   onClick={() => {
                     setOpen(!open);

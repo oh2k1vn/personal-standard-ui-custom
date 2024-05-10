@@ -126,7 +126,9 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
                     }
                   )}
                 >
-                  <p className="line-clamp-1">{title}</p>
+                  <p className="line-clamp-1 pb-1 text-center font-semibold text-lg">
+                    {title}
+                  </p>
                   <div
                     className={cn(
                       "h-1.5 w-14 bg-gray-300 absolute rounded-full left-1/2 -translate-x-1/2 bottom-3",
@@ -153,9 +155,9 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
               </div>
               <div
                 className={cn(
-                  "relative z-0 h-full overflow-y-scroll qmt-5 no-scrollbar w-full",
+                  "relative z-0 h-full overflow-y-scroll mt-5 no-scrollbar w-full",
                   {
-                    "mt-12": title,
+                    "mt-14": title,
                   }
                 )}
               >
