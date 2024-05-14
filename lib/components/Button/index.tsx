@@ -26,10 +26,10 @@ export const Button: React.FC<ButtonProps> = ({
       color={"yellow"}
       style={style}
       className={cn(
-        "relative py-2 px-3 w-fit select-none rounded-md text-center bg-primary border border-transparent text-white cursor-pointer text-text",
+        "relative py-2 px-3 w-fit select-none rounded-md text-center bg-primary border border-transparent text-white cursor-pointer",
         className,
         {
-          "opacity-50 cursor-not-allowed bg-disabled": disabled,
+          "cursor-not-allowed bg-disabled": disabled,
         }
       )}
     >
