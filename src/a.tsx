@@ -7,6 +7,7 @@ import { Button } from "../lib/components/Button";
 import { Input } from "../lib/components/Input";
 import { Checkbox } from "../lib/components/Checkbox";
 import { Dialog, IDialog } from "../lib/components/Dialog";
+import { eventBus } from "../lib/utils/bus";
 import { Demo } from "./demo";
 
 export const ComponentA = () => {
@@ -14,7 +15,6 @@ export const ComponentA = () => {
 
   const ref = React.useRef<IBottomSheet>(null);
   const ref1 = React.useRef<IBottomSheet>(null);
-  const dialog = React.useRef<IDialog>(null);
 
   return (
     <>
@@ -37,13 +37,30 @@ export const ComponentA = () => {
             </Button>
             <Button
               onClick={() => {
-                dialog.current?.open();
+                // dialog.current?.open();
+                eventBus.emit("dialog", {
+                  content: "content",
+                  buttons: [
+                    {
+                      text: "Xác nhận",
+                      onClick: () => {
+                        console.log("button");
+                      },
+                    },
+                  ],
+                });
               }}
             >
               Dialog
             </Button>
 
-            <BottomSheet ref={ref}>
+            <BottomSheet
+              ref={ref}
+              iconClose
+              onClickIconClose={() => {
+                console.log("123123123123");
+              }}
+            >
               <div className="mx-auto max-w-2xl space-y-4 ">
                 <p>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -115,21 +132,7 @@ export const ComponentA = () => {
               </div>
             </BottomSheet>
 
-            <Dialog
-              ref={dialog}
-              content="Drag the handle at the top of this modal downwards 100px to close it"
-              flex="col"
-              buttons={[
-                { text: "hieu", close: true },
-                {
-                  isBorder: true,
-                  text: "1",
-                  onClick() {
-                    console.log("123");
-                  },
-                },
-              ]}
-            ></Dialog>
+            <Dialog />
 
             <div className="flex justify-center items-center size-20 bg-white">
               <Checkbox />

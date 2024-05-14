@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnimatePresence, motion } from "framer-motion";
-import { Button, cn } from "main";
+import { Button, cn, eventBus } from "main";
 import React from "react";
 
 interface IDialogProps {
@@ -7,13 +9,14 @@ interface IDialogProps {
   content?: string | React.ReactNode;
   buttons?: {
     text: string;
-    close?: boolean;
+    isClose?: boolean;
     style?: React.CSSProperties;
     isBorder?: boolean;
     onClick?: () => void;
     className?: string;
   }[];
   flex?: "row" | "col";
+  closeByBackdropClick?: boolean;
 }
 
 export interface IDialog {
@@ -22,35 +25,61 @@ export interface IDialog {
 }
 
 export const Dialog = React.forwardRef<IDialog, IDialogProps>(
-  ({ title, content, buttons, flex = "row" }, ref) => {
+  ({ title, content, buttons, flex = "row", closeByBackdropClick }, ref) => {
     const [open, setOpen] = React.useState(false);
+    const [dataDialog, setDataDialog] = React.useState<IDialogProps>({});
 
     React.useImperativeHandle(
       ref,
       () => {
         return {
           open() {
-            setOpen(true);
+            handleOpenDialog(null);
           },
           close() {
-            setOpen(false);
+            handleCloseDialog();
           },
         };
       },
       []
     );
 
-    const handleClose = async () => {
+    const handleOpenDialog = (data: IDialogProps | null) => {
+      if (data) {
+        setDataDialog({
+          title: data.title,
+          content: data.content,
+          buttons: data.buttons,
+          flex: data.flex ? data.flex : "row",
+          closeByBackdropClick: closeByBackdropClick ? true : false,
+        });
+      } else {
+        setDataDialog({
+          title: title,
+          content: content,
+          buttons: buttons,
+          flex: flex,
+          closeByBackdropClick: closeByBackdropClick ? true : false,
+        });
+      }
+      setOpen(true);
+      document.body.style.overflow = "hidden";
+    };
+
+    const handleCloseDialog = () => {
+      setDataDialog({});
       setOpen(false);
+      document.body.style.overflow = "";
     };
 
     React.useEffect(() => {
-      if (open) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-      }
-    }, [open]);
+      eventBus.on("dialog", handleOpenDialog);
+      eventBus.on("hide-dialog", handleCloseDialog);
+      return () => {
+        eventBus.off("dialog", handleOpenDialog);
+        eventBus.on("hide-dialog", handleCloseDialog);
+      };
+    }, []);
 
     return (
       <AnimatePresence mode="wait">
@@ -65,7 +94,11 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={handleClose}
+              onClick={() => {
+                if (!dataDialog.closeByBackdropClick) {
+                  handleCloseDialog();
+                }
+              }}
               className="absolute inset-0 -z-[1] bg-neutral-950/70 "
             ></motion.div>
             <motion.div
@@ -75,31 +108,35 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>(
               exit={{ opacity: 0, scale: 0.85 }}
             >
               <div className="font-bold text-base text-black">
-                {title ? title : "Thông báo"}
+                {dataDialog.title ? dataDialog.title : "Thông báo"}
               </div>
-              <div className="text-sm mt-3 mb-4 text-black/80">{content}</div>
-              {buttons?.length ? (
+              <div className="text-sm mt-3 mb-4 text-black/80">
+                {dataDialog.content}
+              </div>
+              {dataDialog.buttons?.length ? (
                 <div
                   className={cn("flex items-center gap-3 mt-4 ", {
-                    "flex-col": flex == "col",
-                    "flex-row justify-end": flex == "row",
-                    "justify-center items-center": buttons.length == 1,
+                    "flex-col": dataDialog.flex == "col",
+                    "flex-row justify-end": dataDialog.flex == "row",
+                    "justify-center items-center":
+                      dataDialog.buttons.length == 1,
                   })}
                 >
-                  {buttons?.map((item, index) => (
+                  {dataDialog.buttons?.map((item, index) => (
                     <Button
                       key={index}
                       onClick={() => {
-                        if (item.close) {
-                          handleClose();
+                        if (item.isClose || !item.onClick) {
+                          handleCloseDialog();
                         } else {
                           item.onClick && item.onClick();
                         }
                       }}
                       className={cn("text-sm", {
                         "bg-transparent text-gray-600": index == 1,
-                        "w-full": flex == "col",
-                        "text-primary bg-transparent": buttons.length == 1,
+                        "w-full": dataDialog.flex == "col",
+                        "text-primary bg-transparent":
+                          dataDialog.buttons?.length == 1,
                         "border border-primary": item.isBorder,
                       })}
                       style={item.style}

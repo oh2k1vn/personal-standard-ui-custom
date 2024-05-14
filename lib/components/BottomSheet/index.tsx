@@ -15,6 +15,7 @@ interface IBottomSheetProps {
   setHeight?: number;
   title?: string;
   iconClose?: boolean;
+  onClickIconClose?: () => void;
 }
 
 export interface IBottomSheet {
@@ -23,7 +24,10 @@ export interface IBottomSheet {
 }
 
 export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
-  ({ children, setHeight, title, iconClose = false }, ref) => {
+  (
+    { children, setHeight, title, iconClose = false, onClickIconClose },
+    ref
+  ) => {
     const [open, setOpen] = React.useState(false);
 
     React.useImperativeHandle(
@@ -66,6 +70,7 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
         document.body.style.overflow = "";
       }
     }, [open]);
+
     return (
       <AnimatePresence mode="wait">
         {open && (
@@ -140,9 +145,14 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
 
                   {iconClose && (
                     <svg
-                      onClick={handleClose}
+                      onClick={() => {
+                        handleClose();
+                        if (onClickIconClose) {
+                          onClickIconClose();
+                        }
+                      }}
                       xmlns="http://www.w3.org/2000/svg"
-                      className="absolute size-5 text-gray-300 right-4 top-2"
+                      className="absolute size-5 text-gray-300 right-4 top-2 cursor-pointer"
                       viewBox="0 0 24 24"
                     >
                       <path
@@ -158,6 +168,7 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
                   "relative z-0 h-full overflow-y-scroll mt-5 no-scrollbar w-full",
                   {
                     "mt-14": title,
+                    "mt-10": !title,
                   }
                 )}
               >
