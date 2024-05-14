@@ -4,17 +4,19 @@ import "../lib/tailwind.css";
 
 import { BottomSheet, IBottomSheet } from "../lib/components/BottomSheet";
 import { Button } from "../lib/components/Button";
-import { Input } from "../lib/components/Input";
-import { Checkbox } from "../lib/components/Checkbox";
 import { Dialog, IDialog } from "../lib/components/Dialog";
-import { eventBus } from "../lib/utils/bus";
+import { Input } from "../lib/components/Input";
+import { useDialog } from "../lib/hooks/useDialog";
 import { Demo } from "./demo";
 
 export const ComponentA = () => {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
   const ref = React.useRef<IBottomSheet>(null);
   const ref1 = React.useRef<IBottomSheet>(null);
+
+  const dialogRef = React.useRef<IDialog>(null);
+  const { open, close } = useDialog(dialogRef);
 
   return (
     <>
@@ -28,23 +30,50 @@ export const ComponentA = () => {
         <div className="bg-surface max-w-80 w-full rounded shadow dark:text-white text-black flex flex-col gap-4 p-4 h-full overflow-y-auto">
           <div className="flex flex-col gap-6 items-center bg-white">
             <Input className=" bg-white" type="text" />
+
             <Button
               onClick={() => {
-                Promise.all([ref.current?.open()]);
-              }}
-            >
-              Bottom Sheet
-            </Button>
-            <Button
-              onClick={() => {
-                // dialog.current?.open();
-                eventBus.emit("dialog", {
-                  content: "content",
+                // Promise.all([ref.current?.open()]);
+
+                open({
+                  content: "content 1",
                   buttons: [
                     {
                       text: "Xác nhận",
                       onClick: () => {
                         console.log("button");
+                      },
+                    },
+                    {
+                      text: "Hủy",
+                      onClick() {
+                        close();
+                      },
+                    },
+                  ],
+                });
+              }}
+            >
+              Bottom Sheet
+            </Button>
+
+            <Button
+              onClick={() => {
+                // dialog.current?.open();
+                open({
+                  content: "content 2",
+                  flex: "col",
+                  buttons: [
+                    {
+                      text: "Xác nhận",
+                      onClick: () => {
+                        console.log("button");
+                      },
+                    },
+                    {
+                      text: "Hủy",
+                      onClick() {
+                        close();
                       },
                     },
                   ],
@@ -70,7 +99,7 @@ export const ComponentA = () => {
                 </p>
                 <Button
                   onClick={() => {
-                    setOpen(!open);
+                    // setOpen(!open);
                   }}
                 >
                   Bottom Sheet
@@ -81,7 +110,7 @@ export const ComponentA = () => {
                   enim suscipit nulla aliquid iure optio quaerat deserunt,
                   molestias quasi facere aut quidem reprehenderit maiores.
                 </p>
-                {open && (
+                {/* {open && (
                   <>
                     <p>
                       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -112,7 +141,7 @@ export const ComponentA = () => {
                       maiores.
                     </p>
                   </>
-                )}
+                )} */}
               </div>
             </BottomSheet>
 
@@ -132,11 +161,7 @@ export const ComponentA = () => {
               </div>
             </BottomSheet>
 
-            <Dialog />
-
-            <div className="flex justify-center items-center size-20 bg-white">
-              <Checkbox />
-            </div>
+            <Dialog ref={dialogRef} />
           </div>
           <Demo />
         </div>
