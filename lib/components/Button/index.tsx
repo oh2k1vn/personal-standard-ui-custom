@@ -2,6 +2,7 @@
 import React from "react";
 import Ripple from "react-ripplejs";
 import { cn } from "utils/cn";
+import { Button as Btn } from "react-aria-components";
 
 interface ButtonProps {
   type?: "button" | "reset" | "submit";
@@ -21,28 +22,28 @@ export const Button: React.FC<ButtonProps> = ({
   style,
 }) => {
   return (
-    <Ripple
-      onClick={disabled ? () => {} : onClick}
-      color={"yellow"}
-      style={style}
+    <Btn
+      isDisabled={disabled}
+      type={type}
       className={cn(
-        "relative py-2 px-3 w-fit select-none rounded-md text-center bg-primary border border-transparent text-white cursor-pointer",
-        className,
-        {
-          "cursor-not-allowed bg-disabled": disabled,
-        }
+        "group focus-visible:outline-none focus-visible:ring-0 border-none"
       )}
+      onPress={onClick}
     >
-      <button
-        disabled={disabled}
-        type={type}
+      <Ripple
+        color={"white"}
+        style={style}
         className={cn(
-          "w-full h-full text-sm flex justify-center items-center overflow-hidden line-clamp-1 m-0 p-0 "
+          "relative py-1.5 px-3 w-fit select-none rounded-md text-center bg-primary border border-transparent text-white cursor-pointer text-ellipsis",
+          "group-data-[pressed]:scale-90 transition-all duration-300",
+          className,
+          {
+            "cursor-not-allowed bg-disabled": disabled,
+          }
         )}
-        style={{ whiteSpace: "nowrap", textOverflow: "ellipsis" }}
       >
         {children}
-      </button>
-    </Ripple>
+      </Ripple>
+    </Btn>
   );
 };
