@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnimatePresence, motion } from "framer-motion";
-import { Button, cn, eventBus } from "main";
+import { Button, cn } from "main";
 import React from "react";
 
 interface IDialogProps {
@@ -57,15 +57,6 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>((_, ref) => {
     setOpen(false);
     document.body.style.overflow = "";
   };
-
-  React.useEffect(() => {
-    eventBus.on("dialog", handleOpenDialog);
-    eventBus.on("hide-dialog", handleCloseDialog);
-    return () => {
-      eventBus.off("dialog", handleOpenDialog);
-      eventBus.on("hide-dialog", handleCloseDialog);
-    };
-  }, []);
 
   return (
     <AnimatePresence mode="wait">
