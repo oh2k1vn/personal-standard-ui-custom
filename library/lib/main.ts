@@ -7,6 +7,7 @@ export { Dialog } from "./components/Dialog";
 export { Toggle } from "./components/Toggle";
 export { Input } from "./components/Input";
 export { Checkbox } from "./components/Checkbox";
+// export { CheckInternet } from "./components/CheckInternet";
 
 // hooks
 export { useDialog } from "./hooks/useDialog";

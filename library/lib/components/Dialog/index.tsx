@@ -108,12 +108,13 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>((_, ref) => {
                         item.onClick && item.onClick();
                       }
                     }}
-                    className={cn("text-sm", {
+                    className={cn("text-sm font-semibold", {
                       "bg-transparent text-gray-600": index == 1,
                       "w-full": dataDialog.flex == "col",
                       "text-primary bg-transparent":
                         dataDialog.buttons?.length == 1,
-                      "border border-primary": item.isBorder,
+                      "border border-primary":
+                        item.isBorder || (item.isClose && item.onClick),
                     })}
                     style={item.style}
                   >

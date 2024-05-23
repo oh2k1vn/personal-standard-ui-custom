@@ -20,25 +20,27 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   style,
 }) => {
+  const handleOnclick = () => {
+    if (disabled) return;
+    onClick();
+  };
+
   return (
     <Ripple
-      onClick={disabled ? () => {} : onClick}
-      color={"yellow"}
-      style={style}
+      onClick={handleOnclick}
       className={cn(
-        "relative py-2 px-3 w-fit select-none rounded-md text-center bg-primary border border-transparent text-white cursor-pointer",
+        "w-full bg-primary rounded-md py-2 px-3 cursor-pointer select-none border border-transparent text-white",
         className,
         {
-          "cursor-not-allowed bg-disabled": disabled,
+          "cursor-not-allowed opacity-70": disabled,
         }
       )}
+      style={style}
     >
       <button
-        disabled={disabled}
+        onClick={handleOnclick}
         type={type}
-        className={cn(
-          "w-full h-full text-sm flex justify-center items-center overflow-hidden line-clamp-1 m-0 p-0 "
-        )}
+        className="m-0 p-0 line-clamp-1 size-full"
         style={{ whiteSpace: "nowrap", textOverflow: "ellipsis" }}
       >
         {children}

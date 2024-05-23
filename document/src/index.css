@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: -apple-system, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+@layer base {
+  :root {
+    --color-primary: #651dfe;
+    --zmp-theme-color-shade: #651dfe;
+    --zmp-theme-color-tint: #651dfe;
+  }
+
+  body {
+    font-family: -apple-system, Roboto, "Open Sans", "Helvetica Neue",
+      sans-serif;
+  }
 }
 
 @layer utilities {

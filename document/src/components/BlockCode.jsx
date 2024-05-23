@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const BlockCode = ({ code, language = "jsx", showLineNumbers }) => {
   return (
-    <div className="max-h-[40rem] overflow-y-auto h-full no-scrollbar">
+    <div className="max-h-[40rem] overflow-y-auto h-fit no-scrollbar my-4">
       <CopyBlock
         language={language}
         text={code}

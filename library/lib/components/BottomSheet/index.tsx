@@ -80,7 +80,7 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="fixed inset-0 z-50 bg-neutral-950/30 select-none"
+            className="fixed inset-0 z-40 bg-neutral-950/30 select-none"
           >
             <motion.div
               id="drawer"

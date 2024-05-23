@@ -35,18 +35,20 @@ const Container = () => {
           }
         />
         <React.Suspense fallback={LoadingScreen}>
-          <Routes location={location} key={location.key}>
-            <Route index element={<Docs />} />
-            <Route path="/bottomSheet" element={<BottomSheet />} />
-            <Route path="/button" element={<Button />} />
-            <Route path="/carousel" element={<Carousel />} />
-            <Route path="/checkBox" element={<CheckBox />} />
-            <Route path="/checkInternet" element={<CheckInternet />} />
-            <Route path="/dialog" element={<Dialog />} />
-            <Route path="/input" element={<Input />} />
-            <Route path="/slider" element={<Slider />} />
-            <Route path="/toggle" element={<Toggle />} />
-          </Routes>
+          <div className="pb-32 px-4 pt-4 overflow-y-auto h-full no-scrollbar">
+            <Routes location={location} key={location.key}>
+              <Route index element={<Docs />} />
+              <Route path="/bottomSheet" element={<BottomSheet />} />
+              <Route path="/button" element={<Button />} />
+              <Route path="/carousel" element={<Carousel />} />
+              <Route path="/checkBox" element={<CheckBox />} />
+              <Route path="/checkInternet" element={<CheckInternet />} />
+              <Route path="/dialog" element={<Dialog />} />
+              <Route path="/input" element={<Input />} />
+              <Route path="/slider" element={<Slider />} />
+              <Route path="/toggle" element={<Toggle />} />
+            </Routes>
+          </div>
         </React.Suspense>
       </motion.div>
     </LocationProvider>
