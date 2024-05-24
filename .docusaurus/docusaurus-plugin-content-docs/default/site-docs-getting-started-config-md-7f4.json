@@ -1,0 +1,27 @@
+{
+  "id": "getting-started/config",
+  "title": "Config",
+  "description": "Root Variable Color",
+  "source": "@site/docs/getting-started/config.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/config",
+  "permalink": "/en/docs/getting-started/config",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/oh2k1vn/personal-standard-ui-custom/docs/getting-started/config.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Installation",
+    "permalink": "/en/docs/getting-started/installation"
+  },
+  "next": {
+    "title": "Components",
+    "permalink": "/en/docs/category/components"
+  }
+}

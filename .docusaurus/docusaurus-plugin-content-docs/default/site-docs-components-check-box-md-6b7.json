@@ -1,0 +1,27 @@
+{
+  "id": "components/check-box",
+  "title": "CheckBox",
+  "description": "Tailwind CSS React Checkbox",
+  "source": "@site/docs/components/check-box.md",
+  "sourceDirName": "components",
+  "slug": "/components/check-box",
+  "permalink": "/en/docs/components/check-box",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/oh2k1vn/personal-standard-ui-custom/docs/components/check-box.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Bottom Sheet",
+    "permalink": "/en/docs/components/bottom-sheet"
+  },
+  "next": {
+    "title": "Dialog",
+    "permalink": "/en/docs/components/dialog"
+  }
+}

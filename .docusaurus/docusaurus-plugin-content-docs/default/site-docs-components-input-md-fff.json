@@ -1,0 +1,23 @@
+{
+  "id": "components/input",
+  "title": "Inputs",
+  "description": "Tailwind CSS React Inputs",
+  "source": "@site/docs/components/input.md",
+  "sourceDirName": "components",
+  "slug": "/components/input",
+  "permalink": "/en/docs/components/input",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/oh2k1vn/personal-standard-ui-custom/docs/components/input.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Toggle",
+    "permalink": "/en/docs/components/toggle"
+  }
+}

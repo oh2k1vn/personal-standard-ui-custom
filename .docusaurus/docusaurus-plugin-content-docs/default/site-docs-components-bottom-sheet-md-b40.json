@@ -1,0 +1,27 @@
+{
+  "id": "components/bottom-sheet",
+  "title": "Bottom Sheet",
+  "description": "Tailwind CSS React Bottom Sheet",
+  "source": "@site/docs/components/bottom-sheet.md",
+  "sourceDirName": "components",
+  "slug": "/components/bottom-sheet",
+  "permalink": "/en/docs/components/bottom-sheet",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/oh2k1vn/personal-standard-ui-custom/docs/components/bottom-sheet.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Button",
+    "permalink": "/en/docs/components/button"
+  },
+  "next": {
+    "title": "CheckBox",
+    "permalink": "/en/docs/components/check-box"
+  }
+}
