@@ -9,18 +9,18 @@ const config: Config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-site.example.com",
+  url: "https://personal-standard-ui-custom",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "oh2k1vn", // Usually your GitHub org/user name.
-  projectName: "Personal Standard Ui Custom", // Usually your repo name.
-
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  projectName: "personal-standard-ui-custom", // Usually your repo name.
+  deploymentBranch: "development",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -28,14 +28,6 @@ const config: Config = {
   i18n: {
     defaultLocale: "vi",
     locales: ["en", "vi"],
-    localeConfigs: {
-      en: {
-        label: "English",
-      },
-      vi: {
-        label: "VietNam",
-      },
-    },
   },
 
   presets: [
@@ -82,10 +74,6 @@ const config: Config = {
           href: "https://github.com/oh2k1vn/personal-standard-ui-custom",
           label: "GitHub",
           position: "right",
-        },
-        {
-          type: "localeDropdown",
-          position: "left",
         },
       ],
     },
