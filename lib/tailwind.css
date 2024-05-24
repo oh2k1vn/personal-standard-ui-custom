@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #8739f9;
+    --color-background: #f2f2f2;
+    --color-surface: #ffffff;
+    --color-accent: #37b9f1;
+    --color-grey: #f2f5f5;
+    --color-text: #121212;
+    --color-label: #908e9b;
+    --color-disabled: #e1dfe9;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background: #1e1e1e;
+      --color-surface: #303030;
+      --color-accent: #37b9f1;
+      --color-grey: #f2f5f5;
+      --color-text: #f1f1f1;
+      --color-label: #908e9b;
+      --color-disabled: #e1dfe9;
+    }
+  }
+
+  input[type="text"]:focus,
+  textarea:focus {
+    box-shadow: 0px 0px 3px 0px var(--color-primary);
+    -webkit-box-shadow: 0px 0px 3px 0px var(--color-primary);
+    -moz-box-shadow: 0px 0px 3px 0px var(--color-primary);
+    border: 0.5px solid var(--color-primary);
+  }
+
+  textarea {
+    @apply text-black flex w-full rounded-md border bg-transparent pl-3 pr-7 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  div {
+    @apply select-none;
+  }
+}
+
+@layer components {
+  .text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.pull-indicator {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-lighter);
+  transition: transform 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.pull-indicator i {
+  transition: transform 0.2s ease-in-out;
+}
+
+.pull-indicator.flip i {
+  transform: rotate(180deg);
+}
