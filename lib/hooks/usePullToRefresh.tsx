@@ -9,7 +9,7 @@ const SHOW_INDICATOR_THRESHOLD = 0;
 
 export const usePullToRefresh = (
   ref: React.RefObject<HTMLDivElement>,
-  onRefresh: () => Promise<any>
+  onRefresh: () => void
 ) => {
   React.useEffect(() => {
     const el = ref.current;

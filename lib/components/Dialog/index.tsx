@@ -103,7 +103,12 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>((_, ref) => {
                     key={index}
                     onClick={() => {
                       if (item.isClose || !item.onClick) {
-                        handleCloseDialog();
+                        if (item.onClick) {
+                          item.onClick && item.onClick();
+                          handleCloseDialog();
+                        } else {
+                          handleCloseDialog();
+                        }
                       } else {
                         item.onClick && item.onClick();
                       }

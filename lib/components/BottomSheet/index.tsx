@@ -152,7 +152,7 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
                         }
                       }}
                       xmlns="http://www.w3.org/2000/svg"
-                      className="absolute h-5 w-5 text-gray-300 right-4 top-2 cursor-pointer"
+                      className="absolute h-5 w-5 text-gray-300 left-4 top-2 cursor-pointer"
                       viewBox="0 0 24 24"
                     >
                       <path

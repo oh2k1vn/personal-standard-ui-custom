@@ -20,27 +20,6 @@ interface AvatarProps {
   size?: number;
   /** `src` cho thẻ `img` của avatar */
   src?: string;
-  /**
-   * Màu nền của avatar. Các giá trị hợp lệ bao gồm:
-   *   - `BLUE-BLUELIGHT`: Màu xanh dương đậm
-   *   - `PURPLE-BLUE`: Màu tím-xanh dương
-   *   - `SKYBLUE-GREEN`: Màu xanh da trời nhạt-xanh lá cây
-   *   - `GREEN-GREENLIGHT`: Màu xanh lá cây đậm-xanh lá cây nhạt
-   *
-   *   Nếu không được chỉ định trước và Avatar là string thì giá trị sẽ được tính toán trước dựa trên nội dung Avatar.
-   */
-  backgroundColor?:
-    | "BLUE-BLUELIGHT"
-    | "PURPLE-BLUE"
-    | "SKYBLUE-GREEN"
-    | "GREEN-GREENLIGHT";
-
-  /**
-   * Trạng thái block của avatar. Nếu có giá trị là true, avatar sẽ hiển thị trạng thái bị khóa.
-   *
-   * @default false
-   */
-  blocked?: boolean;
 
   /**
    * Callback được gọi khi người dùng nhấn chuột vào avatar.
@@ -100,7 +79,7 @@ export const Avatar: React.FC<AvatarProps> = (props) => {
           className="size-full object-cover rounded-full overflow-hidden absolute top-0 left-0"
         />
       ) : (
-        <div className="size-full rounded-full overflow-hidden absolute top-0 left-0 inline-flex items-center justify-center bg-inherit"></div>
+        <div className="size-full rounded-full overflow-hidden absolute top-0 left-0 inline-flex items-center justify-center bg-inherit "></div>
       )}
 
       {props.online && (
