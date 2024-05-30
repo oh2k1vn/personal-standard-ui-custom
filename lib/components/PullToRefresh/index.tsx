@@ -13,7 +13,6 @@ interface IPullToRefresh {
   refreshingContent?: JSX.Element | string;
   children: ReactNode;
   pullDownThreshold?: number;
-  maxPullDownDistance?: number;
   resistance?: number;
   backgroundColor?: string;
   className?: string;
@@ -25,8 +24,7 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
   onRefresh,
   refreshingContent,
   children,
-  pullDownThreshold = 80,
-  maxPullDownDistance = 95, // max distance to scroll to trigger refresh
+  pullDownThreshold = 130,
   resistance = 1,
   backgroundColor,
   className = "",
@@ -58,7 +56,7 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
       childrenEl.removeEventListener("mouseup", onEnd);
       document.body.removeEventListener("mouseleave", onEnd);
     };
-  }, [children, isPullable, onRefresh, pullDownThreshold, maxPullDownDistance]);
+  }, [children, isPullable, onRefresh, pullDownThreshold]);
 
   const initContainer = (): void => {
     requestAnimationFrame(() => {
@@ -122,10 +120,7 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
       e.preventDefault();
     }
 
-    const yDistanceMoved = Math.min(
-      (currentY - startY) / resistance,
-      maxPullDownDistance
-    );
+    const yDistanceMoved = Math.min((currentY - startY) / resistance);
     // Limit to trigger refresh has been breached
     if (yDistanceMoved >= pullDownThreshold) {
       isDragging = true;
@@ -133,13 +128,17 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
     } else {
       pullToRefreshThresholdBreached = false;
     }
+    pullDownRef.current!.style.opacity = (
+      Math.round((yDistanceMoved / 65) * 100) / 100 -
+      0.46
+    ).toString();
+    pullDownRef.current!.style.visibility = "visible";
+    pullDownRef.current!.style.transition = "transform 0.2s";
 
-    pullDownRef.current!.style.opacity = (yDistanceMoved / 65).toString();
     childrenRef.current!.style.overflow = "visible";
     childrenRef.current!.style.transform = `translateY(${appr(
       currentY - startY
     )}px)`;
-    pullDownRef.current!.style.visibility = "visible";
     childrenRef.current!.style.transition = "transform 0.2s";
   };
 
@@ -160,7 +159,9 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
     } else {
       if (childrenRef.current) {
         childrenRef.current.style.overflow = "visible";
-        childrenRef.current.style.transform = `translate(0px, ${pullDownThreshold}px)`;
+        childrenRef.current.style.transform = `translateY(${
+          pullDownThreshold - 50
+        }px)`;
       }
       onRefresh().then(initContainer).catch(initContainer);
     }
@@ -173,7 +174,7 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
       ref={containerRef}
     >
       <div
-        className=" absolute overflow-hidden left-0 top-0 right-0 invisible pb-3"
+        className=" absolute overflow-hidden left-0 top-0 right-0 invisible pt-2 pb-4"
         ref={pullDownRef}
       >
         {refreshingContent ? (
