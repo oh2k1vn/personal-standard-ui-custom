@@ -47,7 +47,7 @@ export const usePullToRefresh = (
     document.body.style.overflow = "hidden";
   };
 
-  const handleTouchEnd = (e: TouchEvent) => {
+  const handleTouchEnd = () => {
     const el = ref.current;
     if (!el) return;
 
@@ -88,8 +88,7 @@ export const usePullToRefresh = (
       handleTouchStart(e as any);
     const handleNativeTouchMove = (e: globalThis.TouchEvent) =>
       handleTouchMove(e as any);
-    const handleNativeTouchEnd = (e: globalThis.TouchEvent) =>
-      handleTouchEnd(e as any);
+    const handleNativeTouchEnd = () => handleTouchEnd();
 
     el.addEventListener("touchstart", handleNativeTouchStart);
     el.addEventListener("touchmove", handleNativeTouchMove);

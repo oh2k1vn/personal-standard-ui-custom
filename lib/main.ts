@@ -8,6 +8,7 @@ export { Toggle } from "./components/Toggle";
 export { Input } from "./components/Input";
 export { Checkbox } from "./components/Checkbox";
 export { Avatar } from "./components/Avatar";
+export { PullToRefresh } from "./components/PullToRefresh";
 
 // hooks
 export { useDialog } from "./hooks/useDialog";
