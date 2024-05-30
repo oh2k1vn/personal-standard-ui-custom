@@ -2,7 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnimatePresence, motion } from "framer-motion";
-import { Button, cn } from "main";
+import { Button } from "main";
+import cn from "../../utils/cn";
 import React from "react";
 
 interface IDialogProps {
@@ -25,7 +26,7 @@ export interface IDialog {
   close: () => void;
 }
 
-export const Dialog = React.forwardRef<IDialog, IDialogProps>((_, ref) => {
+const Dialog = React.forwardRef<IDialog, IDialogProps>((_, ref) => {
   const [open, setOpen] = React.useState(false);
   const [dataDialog, setDataDialog] = React.useState<IDialogProps>({});
 
@@ -134,3 +135,4 @@ export const Dialog = React.forwardRef<IDialog, IDialogProps>((_, ref) => {
     </AnimatePresence>
   );
 });
+export default Dialog;

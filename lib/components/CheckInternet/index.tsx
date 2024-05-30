@@ -1,10 +1,10 @@
 /* eslint-disable no-constant-condition */
 import React from "react";
-import { cn } from "utils/cn";
+import cn from "utils/cn";
 
 interface ICheckInternet extends React.ComponentPropsWithoutRef<"div"> {}
 
-export const CheckInternet: React.FC<ICheckInternet> = () => {
+const CheckInternet: React.FC<ICheckInternet> = () => {
   const getOnLineStatus = () =>
     typeof navigator !== "undefined" && typeof navigator.onLine === "boolean"
       ? navigator.onLine
@@ -75,3 +75,4 @@ export const CheckInternet: React.FC<ICheckInternet> = () => {
     </div>
   );
 };
+export default CheckInternet;

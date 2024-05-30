@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion, useMotionValue } from "framer-motion";
 import React from "react";
-import { cn } from "utils/cn";
+import cn from "utils/cn";
 
 const DRAG_BUFFER = 50;
 
@@ -18,7 +18,7 @@ interface CarouselProps extends React.ComponentPropsWithoutRef<"div"> {
   images: string[];
 }
 
-export const Carousel: React.FC<CarouselProps> = ({
+const Carousel: React.FC<CarouselProps> = ({
   images,
   autoDelay = 3000,
   autoPlay = false,
@@ -81,6 +81,8 @@ export const Carousel: React.FC<CarouselProps> = ({
     </div>
   );
 };
+
+export default Carousel;
 
 const Images = ({
   images,

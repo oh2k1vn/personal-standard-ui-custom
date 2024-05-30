@@ -2,7 +2,7 @@ import React from "react";
 
 interface CheckboxProp extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProp>(
+const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProp>(
   ({ className, ...props }, ref) => {
     return (
       <input
@@ -14,3 +14,4 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProp>(
     );
   }
 );
+export default Checkbox;

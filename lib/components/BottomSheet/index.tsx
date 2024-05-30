@@ -23,7 +23,7 @@ export interface IBottomSheet {
   close: () => void;
 }
 
-export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
+const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
   (
     { children, setHeight, title, iconClose = false, onClickIconClose },
     ref
@@ -181,3 +181,4 @@ export const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
     );
   }
 );
+export default BottomSheet;

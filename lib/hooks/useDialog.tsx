@@ -16,7 +16,7 @@ interface IDialogProps {
   closeByBackdropClick?: boolean;
 }
 
-export const useDialog = (ref: any) => {
+const useDialog = (ref: any) => {
   const open = (data: IDialogProps) => {
     ref.current?.open(data);
   };
@@ -27,3 +27,4 @@ export const useDialog = (ref: any) => {
 
   return { open, close };
 };
+export default useDialog;

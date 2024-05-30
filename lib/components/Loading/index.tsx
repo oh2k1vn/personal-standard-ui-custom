@@ -7,7 +7,7 @@ interface ILoading extends React.ComponentPropsWithoutRef<"div"> {
   active?: boolean;
 }
 
-export const Loading: React.FC<ILoading> = ({ src, active }) => {
+const Loading: React.FC<ILoading> = ({ src, active }) => {
   return (
     <AnimatePresence mode="wait">
       {active && (
@@ -34,3 +34,4 @@ export const Loading: React.FC<ILoading> = ({ src, active }) => {
     </AnimatePresence>
   );
 };
+export default Loading;

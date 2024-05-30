@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import Ripple from "react-ripplejs";
-import { cn } from "utils/cn";
+import cn from "utils/cn";
 
 interface ButtonProps {
   type?: "button" | "reset" | "submit";
@@ -12,7 +12,7 @@ interface ButtonProps {
   style?: React.CSSProperties;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   type,
   className,
   disabled,
@@ -48,3 +48,4 @@ export const Button: React.FC<ButtonProps> = ({
     </Ripple>
   );
 };
+export default Button;

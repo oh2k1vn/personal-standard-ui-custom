@@ -1,7 +1,7 @@
 {
   "name": "personal-standard-ui-custom",
   "private": false,
-  "version": "0.5.3",
+  "version": "0.5.4",
   "type": "module",
   "license": "MIT",
   "files": [
@@ -34,8 +34,7 @@
     "react-use-measure": "^2.1.1",
     "tailwind-merge": "^2.3.0",
     "vite-tsconfig-paths": "^4.3.2",
-    "web-vitals": "^3.5.2",
-    "zmp-ui": "^1.11.3"
+    "web-vitals": "^3.5.2"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",

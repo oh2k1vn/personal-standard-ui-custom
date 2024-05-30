@@ -8,12 +8,7 @@ interface ToggleProp {
   label?: string;
 }
 
-export const Toggle: React.FC<ToggleProp> = ({
-  onChange,
-  value,
-  disabled,
-  label,
-}) => {
+const Toggle: React.FC<ToggleProp> = ({ onChange, value, disabled, label }) => {
   return (
     <Switch
       isDisabled={disabled}
@@ -28,3 +23,4 @@ export const Toggle: React.FC<ToggleProp> = ({
     </Switch>
   );
 };
+export default Toggle;

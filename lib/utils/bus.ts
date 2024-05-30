@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-export class EventBus {
+class EventBus {
   private events: Record<string, Function[]> = {};
 
   public on(eventName: string, callback: Function): this {
@@ -65,4 +65,6 @@ export class EventBus {
   }
 }
 
-export const eventBus = new EventBus();
+const eventBus = new EventBus();
+
+export default eventBus;

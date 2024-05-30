@@ -1,11 +1,11 @@
 import React from "react";
-import { cn } from "utils/cn";
+import cn from "utils/cn";
 
 interface InputProp extends React.InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProp>(
+const Input = React.forwardRef<HTMLInputElement, InputProp>(
   ({ onClear, ...props }, ref) => {
     return (
       <div className="relative">
@@ -40,3 +40,4 @@ export const Input = React.forwardRef<HTMLInputElement, InputProp>(
     );
   }
 );
+export default Input;

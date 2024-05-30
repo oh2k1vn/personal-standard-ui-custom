@@ -26,6 +26,7 @@ export default defineConfig({
       },
     },
   },
+
   plugins: [
     react(),
     dts({ include: ["lib"], insertTypesEntry: true }),

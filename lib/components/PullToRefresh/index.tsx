@@ -13,18 +13,20 @@ interface IPullToRefresh {
   refreshingContent?: JSX.Element | string;
   children: ReactNode;
   pullDownThreshold?: number;
+  stretchedDownToTheThreshold?: number;
   resistance?: number;
   backgroundColor?: string;
   className?: string;
 }
 
-export const PullToRefresh: React.FC<IPullToRefresh> = ({
+const PullToRefresh: React.FC<IPullToRefresh> = ({
   srcLogo,
   isPullable = true,
   onRefresh,
   refreshingContent,
   children,
   pullDownThreshold = 130,
+  stretchedDownToTheThreshold = 50,
   resistance = 1,
   backgroundColor,
   className = "",
@@ -160,7 +162,7 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
       if (childrenRef.current) {
         childrenRef.current.style.overflow = "visible";
         childrenRef.current.style.transform = `translateY(${
-          pullDownThreshold - 50
+          pullDownThreshold - stretchedDownToTheThreshold
         }px)`;
       }
       onRefresh().then(initContainer).catch(initContainer);
@@ -174,7 +176,7 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
       ref={containerRef}
     >
       <div
-        className=" absolute overflow-hidden left-0 top-0 right-0 invisible pt-2 pb-4"
+        className="-z-[1] absolute overflow-hidden left-0 top-0 right-0 invisible pt-2 pb-4"
         ref={pullDownRef}
       >
         {refreshingContent ? (
@@ -200,3 +202,4 @@ export const PullToRefresh: React.FC<IPullToRefresh> = ({
     </div>
   );
 };
+export default PullToRefresh;
