@@ -17,6 +17,7 @@ interface IPullToRefresh {
   resistance?: number;
   backgroundColor?: string;
   className?: string;
+  speedBoost?: number;
 }
 
 const PullToRefresh: React.FC<IPullToRefresh> = ({
@@ -30,6 +31,7 @@ const PullToRefresh: React.FC<IPullToRefresh> = ({
   resistance = 1,
   backgroundColor,
   className = "",
+  speedBoost = 0.4,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
@@ -145,7 +147,9 @@ const PullToRefresh: React.FC<IPullToRefresh> = ({
   };
 
   const appr = (x: number) => {
-    return 128 * (1 - Math.exp((-0.4 * x) / 128));
+    return (
+      pullDownThreshold * (1 - Math.exp((-speedBoost * x) / pullDownThreshold))
+    );
   };
 
   const onEnd = (): void => {

@@ -93,7 +93,7 @@ const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
                 duration: 0.5,
               }}
               className={cn(
-                "absolute bottom-0 w-full overflow-hidden rounded-t-2xl bg-white max-h-screen flex flex-col"
+                "absolute bottom-0 w-full overflow-hidden bg-white max-h-screen flex flex-col"
               )}
               style={{
                 y,
@@ -101,6 +101,8 @@ const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
                   ? setHeight + "vh"
                   : "fit-content -webkit-fill-available",
                 maxHeight: window.innerHeight + "px",
+                borderTopLeftRadius: setHeight == 100 ? "0px" : "1rem",
+                borderTopRightRadius: setHeight == 100 ? "0px" : "1rem",
               }}
               drag="y"
               dragControls={controls}
