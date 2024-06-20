@@ -1,4 +1,4 @@
-import { cn } from "main";
+import { cn } from "../../main";
 
 interface AvatarProps {
   id?: string;

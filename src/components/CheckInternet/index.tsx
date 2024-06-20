@@ -1,8 +1,8 @@
 /* eslint-disable no-constant-condition */
 import React from "react";
-import cn from "utils/cn";
+import { cn } from "../../main";
 
-interface ICheckInternet extends React.ComponentPropsWithoutRef<"div"> {}
+interface ICheckInternet extends React.ComponentPropsWithoutRef<"div"> { }
 
 const CheckInternet: React.FC<ICheckInternet> = () => {
   const getOnLineStatus = () =>

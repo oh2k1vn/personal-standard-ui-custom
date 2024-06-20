@@ -8,7 +8,7 @@ import {
 } from "framer-motion";
 import useMeasure from "react-use-measure";
 import React from "react";
-import { cn } from "main";
+import { cn } from "../../main";
 
 interface IBottomSheetProps {
   children: React.ReactNode;
@@ -16,6 +16,7 @@ interface IBottomSheetProps {
   title?: string;
   iconClose?: boolean;
   onClickIconClose?: () => void;
+  closeByOverlay?: boolean
 }
 
 export interface IBottomSheet {
@@ -25,7 +26,7 @@ export interface IBottomSheet {
 
 const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
   (
-    { children, setHeight, title, iconClose = false, onClickIconClose },
+    { children, setHeight, title, iconClose = false, onClickIconClose, closeByOverlay = true },
     ref
   ) => {
     const [open, setOpen] = React.useState(false);
@@ -79,7 +80,11 @@ const BottomSheet = React.forwardRef<IBottomSheet, IBottomSheetProps>(
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={handleClose}
+            onClick={() => {
+              if (!closeByOverlay) {
+                handleClose()
+              }
+            }}
             className="fixed inset-0 z-40 bg-neutral-950/30 select-none"
           >
             <motion.div

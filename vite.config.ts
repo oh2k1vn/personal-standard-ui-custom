@@ -9,7 +9,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, "lib/main.ts"),
+      entry: path.resolve(__dirname, "src/main.ts"),
       name: "Personal standard ui custom",
       formats: ["es", "umd"],
       fileName: (format) => `index.${format}.js`,
@@ -26,10 +26,9 @@ export default defineConfig({
       },
     },
   },
-
   plugins: [
     react(),
-    dts({ include: ["lib"], insertTypesEntry: true }),
+    dts({ include: ["src"], insertTypesEntry: true }),
     tsconfigPaths(),
   ],
   css: {

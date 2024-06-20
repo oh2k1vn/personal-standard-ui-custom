@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import Ripple from "react-ripplejs";
-import cn from "utils/cn";
+import { cn } from "../../main";
 
 interface ButtonProps {
   type?: "button" | "reset" | "submit";

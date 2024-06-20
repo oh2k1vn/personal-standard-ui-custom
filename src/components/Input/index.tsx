@@ -1,5 +1,5 @@
 import React from "react";
-import cn from "utils/cn";
+import { cn } from "../../main";
 
 interface InputProp extends React.InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void;

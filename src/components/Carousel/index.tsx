@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion, useMotionValue } from "framer-motion";
 import React from "react";
-import cn from "utils/cn";
+import { cn } from "../../main";
 
 const DRAG_BUFFER = 50;
 
@@ -131,9 +131,8 @@ const Dots = ({
           <button
             key={idx}
             onClick={() => setImgIndex(idx)}
-            className={`size-2 rounded-full transition-colors ${
-              idx === imgIndex ? "bg-primary" : "bg-white bg-opacity-50"
-            }`}
+            className={`size-2 rounded-full transition-colors ${idx === imgIndex ? "bg-primary" : "bg-white bg-opacity-50"
+              }`}
           />
         );
       })}

@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactNode, useEffect, useRef } from "react";
-import { isTreeScrollable } from "utils/isScrollable";
-import { DIRECTION } from "utils/types";
-import { cn } from "main";
+import { cn } from "../../main";
+import { isTreeScrollable } from "../../utils/isScrollable";
+import { DIRECTION } from "../../utils/types";
 
 interface IPullToRefresh {
   srcLogo?: string;
@@ -165,9 +165,8 @@ const PullToRefresh: React.FC<IPullToRefresh> = ({
     } else {
       if (childrenRef.current) {
         childrenRef.current.style.overflow = "visible";
-        childrenRef.current.style.transform = `translateY(${
-          pullDownThreshold - stretchedDownToTheThreshold
-        }px)`;
+        childrenRef.current.style.transform = `translateY(${pullDownThreshold - stretchedDownToTheThreshold
+          }px)`;
       }
       onRefresh().then(initContainer).catch(initContainer);
     }

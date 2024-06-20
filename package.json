@@ -1,13 +1,15 @@
 {
   "name": "personal-standard-ui-custom",
   "private": false,
-  "version": "0.5.6",
+  "version": "0.6.8",
   "type": "module",
-  "license": "MIT",
   "files": [
     "dist",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -17,26 +19,28 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./css": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "publish": "npm publish"
+    "publish": "npm publish --access=public"
   },
   "dependencies": {
     "clsx": "^2.1.0",
-    "react": "^18.2.0",
     "react-aria-components": "^1.1.1",
-    "react-dom": "^18.2.0",
     "react-ripplejs": "^1.0.4",
     "react-use-measure": "^2.1.1",
     "tailwind-merge": "^2.3.0",
     "vite-tsconfig-paths": "^4.3.2",
     "web-vitals": "^3.5.2"
   },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
